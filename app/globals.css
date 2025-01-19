@@ -8,6 +8,12 @@
   .flex-between{
     @apply flex justify-between items-center;
   }
+  .glassmorphism {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust transparency */
+     border: 1px solid rgba(255, 255, 255, 0.3); /*Optional border */
+    /* border-radius: 10px; Optional rounded corners */
+  }
 }
 
 body {
