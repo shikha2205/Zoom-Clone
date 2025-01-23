@@ -7,13 +7,12 @@ const apiSecret=process.env.STREAM_SECRET_KEY;
 export const tokenProvider=async()=>{
   const user=await currentUser();
   if(!user) throw new Error('User is not logged in');
-  if(!apiKey) throw new Error('no Api Key');
+  if(!apiKey) throw new Error('No Api Key');
   if(!apiSecret) throw new Error('No Api Secret');
 
 
   const client=new StreamClient(apiKey,apiSecret)
- const exp=Math.round(new Date().getTime()/1000)+ 60*60;
- const issued=Math.floor(Date.now()/1000)-60;
- const token= client.createToken(user.id,exp,issued)
+  const validityInSeconds = 60 * 60; 
+ const token= client.generateUserToken({user_id: user.id, validity_in_seconds:validityInSeconds});
  return token;
 }

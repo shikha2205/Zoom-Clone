@@ -13,7 +13,7 @@ const MeetingTypeList = () => {
   const{user}=useUser();
   const client=useStreamVideoClient();
   const [values,setValues]=useState({
-    dateTime:new Date(),
+dateTime:new Date(),
 description:'' ,
 link:''
   })
@@ -27,8 +27,7 @@ const[callDetails,setCallDetails]=useState<Call>()
   const id=crypto.randomUUID();
   const call=client.call('default',id);
   if(!call) throw new Error("failed to create call");
-  const startsAt = values.dateTime.toISOString();
-
+  const startsAt = values.dateTime.toISOString()||
   new Date(Date.now()).toISOString();
   const description=values.description||'Instant meeting';
   await call.getOrCreate({
@@ -42,8 +41,7 @@ const[callDetails,setCallDetails]=useState<Call>()
   setCallDetails(call);
   if(!values.description){
     router.push(`/meeting/${call.id}`);
-
-  }
+}
     }catch(error){
      console.log(error);
 
