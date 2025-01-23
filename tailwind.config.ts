@@ -32,6 +32,7 @@ export default {
         yellow:{
           1:'#F9A90E',
         },
+        
       
       background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
