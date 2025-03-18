@@ -4,6 +4,12 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { Toaster } from "@/components/ui/toaster";
+<link rel="icon" href="/favicon.ico" />
+import Image from "next/image";
+
+<Image src="/icons/loading-circle.svg" alt="Loading" priority />
+
+
 
 
 
@@ -53,3 +59,4 @@ export default function RootLayout({
     </html>
   );
 }
+

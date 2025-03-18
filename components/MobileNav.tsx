@@ -1,11 +1,13 @@
 'use client'
 
-import {Sheet,SheetClose,SheetContent,SheetTrigger,} from "@/components/ui/sheet"
+import {Sheet,SheetClose,SheetContent,SheetTrigger,} from "@/components/ui/sheet"   //help in making mobile friendly structure
 import { sidebarLinks } from "@/constants"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils"      
+// cn is usually a helper function to conditionally apply Tailwind CSS classes.
+
 
 
 

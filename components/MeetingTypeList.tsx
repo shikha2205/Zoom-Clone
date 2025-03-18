@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import MeetingModal from './MeetingModal'
 import { useUser } from '@clerk/nextjs'
 import { useStreamVideoClient,Call } from '@stream-io/video-react-sdk'
-import { useToast } from '@/hooks/use-toast'
+import { useToast } from '@/hooks/use-toast'   //useToast is a hook used for displaying temporary notification messages (toasts) in React
 
 const MeetingTypeList = () => {
   const router=useRouter();
@@ -24,7 +24,9 @@ const {toast}=useToast()
 
   const createMeeting=async()=> {
     // backend
-    if(!client || !user) return;
+    if(!client || !user) 
+      
+      return;
     try{
       if(!values.dateTime){
         toast({title:"Please select a date ad time",})
@@ -33,6 +35,7 @@ const {toast}=useToast()
 
 
   const id=crypto.randomUUID();
+ 
 
   const call=client.call('default',id);
   if(!call) throw new Error("failed to create call");
@@ -60,7 +63,6 @@ const {toast}=useToast()
 
     }
 
-    
 
   }
   return (

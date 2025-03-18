@@ -1,11 +1,16 @@
 
 import React from "react";
 
-const Meeting = ({ params } : { params: { id :string}}) => {
+const Meeting =async ({ params } : { params: { id :string}}) => {
+  
+ 
   return (
-    <div>Meeting Room: #{params.id}</div>
+    <div>
+    
+     Meeting Room: #{ params.id}
+     console.log()
+      </div>
   )
 }
-
 export default Meeting
 
