@@ -1,7 +1,7 @@
 
 'use client';
 import { tokenProvider } from "@/actions/stream.actions";
-import Loader from '@/components/Loader';
+//import Loader from '@/components/Loader';
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { ReactNode, useState, useEffect } from "react";
 import { useUser } from '@clerk/nextjs'; // Replace with the actual source of `useUser`
@@ -29,7 +29,7 @@ export const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     setVideoClient(client);
   }, [user, isLoaded]);
 
-  if (!videoClient) return <Loader />;
+  if (!videoClient) return <div>loading..</div>;
 
   return (
   <StreamVideo client={videoClient}>{children}</StreamVideo>
