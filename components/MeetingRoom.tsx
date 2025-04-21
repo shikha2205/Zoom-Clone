@@ -1,13 +1,19 @@
 'use client';
+import React from "react";
+import { useState } from "react";
+import { useRouter } from 'next/navigation';
+
 import {
   PaginatedGridLayout,
   SpeakerLayout,
   CallParticipantsList,
   CallControls,
   CallStatsButton,
+  useCallStateHooks,
+  CallingState as StreamCallingState,
 } from "@stream-io/video-react-sdk";
-import React from "react";
-import { useState } from "react";
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,15 +23,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { cn } from "@/lib/utils";
-import {Users,LayoutList} from 'lucide-react';
-
+import {Users,LayoutList, Loader} from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import EndCallButton from './EndCallsButton'; 
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
+
 const MeetingRoom = () => {
+  const searchParams=useSearchParams();
+  const isPersonalRoom= !!searchParams.get('personal')
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
+  const router=useRouter();
 
+  const {useCallCallingState}= useCallStateHooks();
+  const CallingState =useCallCallingState();
+
+  if(CallingState !== StreamCallingState.JOINED) return
+  <Loader />
+  
+  
   const CallLayout = () => {
     switch (layout) {
       case "grid":
@@ -45,15 +63,15 @@ const MeetingRoom = () => {
         </div>
         <div
           className={cn("h-[calc(100vh-86px)] hidden ml-2", {
-            "show-block": showParticipants,
+            "show-block": showParticipants
           })}
         >
           <CallParticipantsList onClose={() => setShowParticipants(false)} />
         </div>
       </div>
 
-      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
-        <CallControls />
+      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
+        <CallControls onLeave={()=>router.push('/')}/>
 
 
         <DropdownMenu>
@@ -87,6 +105,7 @@ const MeetingRoom = () => {
             <Users size={20} className="text-white"/>
           </div>
         </button>
+        {!isPersonalRoom && <EndCallButton />}
       </div>
     </section>
   );
