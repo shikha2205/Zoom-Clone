@@ -1,4 +1,4 @@
-import CallList from '@/components/ui/CallList'
+import CallList from '@/components/CallList'
 import React from 'react'
 
 const Upcoming = () => {
