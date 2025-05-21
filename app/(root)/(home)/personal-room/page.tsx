@@ -1,5 +1,7 @@
 'use client'
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from "@/components/ui/use-toast";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useRouter } from "next/navigation";
 import { useGetCallById } from '@/hooks/useGetCallById';
 import {useUser} from '@clerk/nextjs';
 import React from 'react'
@@ -7,7 +9,7 @@ import React from 'react'
 // import MeetingTypeList from '@/components/MeetingTypeList';
 
 
-const Table=({title,description}:{title:'string'; description:string})=>(
+const Table=({title,description}:{title:string; description:string})=>(
   
     <div className="flex flex-col items-start gap-2 xl:flex-row">
       <h1 className="text-base font-medium text-sky-1 lg:text-xl xl:min-w-32">{title}:</h1>

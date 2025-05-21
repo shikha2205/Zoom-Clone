@@ -10,6 +10,7 @@ import HomeCard from './HomeCard';
 import Loader from './Loader';
 import MeetingModal from './MeetingModal';
 import { Textarea } from "./ui/textarea";
+import { Input } from './ui/input';
 
 
 
@@ -105,20 +106,21 @@ const {toast}=useToast()
       handleClick={()=>setMeetingState('isJoiningMeeting')}
       className="bg-yellow-1"
       />
+
       {!callDetails ?(
         <MeetingModal 
         isOpen={meetingState=='isScheduleMeeting'}
         onClose={() => setMeetingState(undefined)}
         title="Create Meeting"
-        
         handleClick={createMeeting}
         >
           <div className="flex flex-col gap-2.5">
             <label className="text-base text-normal leading-[22px] text-sky-2">Add a description</label>
             <Textarea className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-            onChange={(e)=>{
+            onChange={(e)=>
               setValues({...values,description:e.target.value})
-            }}/>
+            }
+            />
           </div>
           <div className="flex w-full flex-col gap-2.5">
             <label className="text-base text-normal leading-[22px] text-sky-2">Select Date and Time</label>
@@ -141,48 +143,39 @@ const {toast}=useToast()
       onClose={()=>setMeetingState(undefined)}
       title="Meeting Created"
       className="text-center"
-      
       handleClick={()=>{
         navigator.clipboard.writeText(meetingLink);
-        toast({title:'Link copied'})
+        toast({title:'Link copied'});
       }}
-      image="/icons/checked.svg"
+      image={"/icons/checked.svg"}
       buttonIcon="/icons/copy.svg"
       buttonText="Copy Meeting Link"
       />
 
       )}
 
-      <MeetingModal
-      isOpen={meetingState==='isInstantMeeting'}
-      onClose={()=>setMeetingState(undefined)}
-      title="Start an Instant Meeting"
-      className="text-center"
-      buttonText="Start Meeting"
-      handleClick={createMeeting}
-      />
-
     <MeetingModal
-      isOpen={meetingState==='isInstantMeeting'}
+      isOpen={meetingState==='isJoiningMeeting'}
       onClose={()=>setMeetingState(undefined)}
       title="Type the link here"
       className="text-center"
-      buttonText="Start Meeting"
+      buttonText="Join Meeting"
       handleClick={()=>router.push(values.link)}
     >
 
-      {/* <Input
+      <Input
       placeholder ="Meeting link"
       className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0" 
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValues({...values, link: e.target.value})}
 
-      /> */}
+      />
        
       
       
-      </MeetingModal>
-      <MeetingModal
-        isOpen={meetingState === 'isInstantMeeting'}
+       </MeetingModal>
+
+       <MeetingModal
+         isOpen={meetingState === 'isInstantMeeting'}
         onClose={() => setMeetingState(undefined)}
         title="Start an Instant Meeting"
         className="text-center"
@@ -195,3 +188,4 @@ const {toast}=useToast()
 };
 
 export default MeetingTypeList
+
